@@ -11,6 +11,7 @@ class AddNoteBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
+          
           const SizedBox(
             height: 20,
           ),
@@ -28,6 +29,7 @@ class AddNoteBottomSheet extends StatelessWidget {
             title: 'add',
             onPressed: () {},
           )
+        
         ],
       ),
     );
