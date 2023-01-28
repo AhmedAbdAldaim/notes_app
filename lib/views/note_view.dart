@@ -19,7 +19,7 @@ class NoteView extends StatelessWidget {
               ),
             ),
             builder: (context) {
-              return const AddNoteBottomSheet();
+              return  AddNoteBottomSheet();
             },
           );
         },
