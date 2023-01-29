@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:notes_app/cubits/add_cubit/add_note_cubit.dart';
+import 'package:notes_app/cubits/note_cubit/note_cubit_cubit.dart';
 import 'package:notes_app/model/note_model.dart';
 import 'package:notes_app/views/widgets/custom_bottom.dart';
 import 'package:notes_app/views/widgets/custom_text_field.dart';
@@ -17,6 +18,7 @@ class AddNoteBottomSheet extends StatelessWidget {
         child: BlocConsumer<AddNoteCubit, AddNoteState>(
           listener: (context, state) {
             if (state is AddNoteSuccess) {
+              BlocProvider.of<NoteCubitCubit>(context).featchAllNotes();
               Navigator.of(context).pop();
             }
             if (state is AddNoteFailure) {
@@ -30,12 +32,11 @@ class AddNoteBottomSheet extends StatelessWidget {
                 key: cubit.formkey,
                 child: Padding(
                   padding: EdgeInsets.only(
-                    right: 16,
-                    left: 16,
-                    bottom: MediaQuery.of(context).viewInsets.bottom
-                  ),
+                      right: 16,
+                      left: 16,
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: AbsorbPointer(
-                    absorbing:state is AddNoteLoading?true:false,
+                    absorbing: state is AddNoteLoading ? true : false,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -64,11 +65,12 @@ class AddNoteBottomSheet extends StatelessWidget {
                           },
                         ),
                         CustomBottom(
-                          isLoading: state is AddNoteLoading? true:null,
+                          isLoading: state is AddNoteLoading ? true : null,
                           title: 'add',
                           onPressed: () {
                             if (cubit.formkey.currentState!.validate()) {
-                              var formatdateTime = DateFormat('dd-MM-yyyy').format(DateTime.now());
+                              var formatdateTime = DateFormat('dd-MM-yyyy')
+                                  .format(DateTime.now());
                               BlocProvider.of<AddNoteCubit>(context).addNote(
                                   NoteModel(
                                       title: cubit.title.text,
