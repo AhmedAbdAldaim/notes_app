@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:notes_app/cubits/add_cubit/add_note_cubit.dart';
 import 'package:notes_app/model/note_model.dart';
@@ -67,11 +68,12 @@ class AddNoteBottomSheet extends StatelessWidget {
                           title: 'add',
                           onPressed: () {
                             if (cubit.formkey.currentState!.validate()) {
+                              var formatdateTime = DateFormat('dd-MM-yyyy').format(DateTime.now());
                               BlocProvider.of<AddNoteCubit>(context).addNote(
                                   NoteModel(
                                       title: cubit.title.text,
                                       description: cubit.des.text,
-                                      date: DateTime.now().toString(),
+                                      date: formatdateTime,
                                       color: Colors.amber.shade100.value));
                             }
                           },
