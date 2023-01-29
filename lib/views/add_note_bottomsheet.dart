@@ -24,13 +24,13 @@ class AddNoteBottomSheet extends StatelessWidget {
           },
           builder: (context, state) {
             var cubit = BlocProvider.of<AddNoteCubit>(context);
-            return ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoading ? true : false,
-              child: SingleChildScrollView(
-                child: Form(
-                  key: cubit.formkey,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+            return SingleChildScrollView(
+              child: Form(
+                key: cubit.formkey,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AbsorbPointer(
+                    absorbing:state is AddNoteLoading?true:false,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -59,6 +59,7 @@ class AddNoteBottomSheet extends StatelessWidget {
                           },
                         ),
                         CustomBottom(
+                          isLoading: state is AddNoteLoading? true:null,
                           title: 'add',
                           onPressed: () {
                             if (cubit.formkey.currentState!.validate()) {
