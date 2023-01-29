@@ -28,14 +28,14 @@ class CustomNoteItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile(
-              title:  Text(
-              noteModel.title,
+              title: Text(
+                noteModel.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: Colors.black, fontSize: 24),
               ),
               subtitle: Text(
-              noteModel.description,
+                noteModel.description,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -44,7 +44,9 @@ class CustomNoteItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  noteModel.delete();
+                },
                 icon: const Icon(
                   Icons.delete,
                   color: Colors.black,
@@ -52,8 +54,8 @@ class CustomNoteItem extends StatelessWidget {
               ),
             ),
             Text(
-               noteModel.date,
-               maxLines: 1,
+              noteModel.date,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
             )
