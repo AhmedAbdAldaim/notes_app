@@ -13,15 +13,14 @@ class NoteView extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            isScrollControlled: true,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
                 16,
               ),
             ),
             builder: (context) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: AddNoteBottomSheet());
+              return  const AddNoteBottomSheet();
             },
           );
         },
