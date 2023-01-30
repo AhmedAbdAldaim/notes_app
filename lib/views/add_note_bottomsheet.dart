@@ -64,6 +64,26 @@ class AddNoteBottomSheet extends StatelessWidget {
                             }
                           },
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 30 * 2,
+                          child: ListView.builder(
+                              itemCount: 10,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 10),
+                                  child:  CircleAvatar(
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         CustomBottom(
                           isLoading: state is AddNoteLoading ? true : null,
                           title: 'add',
