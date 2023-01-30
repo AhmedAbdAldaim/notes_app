@@ -13,3 +13,5 @@ class AddNoteFailure extends AddNoteState {
   final String message;
   AddNoteFailure(this.message);
 }
+
+class SelectedColor extends AddNoteState{}

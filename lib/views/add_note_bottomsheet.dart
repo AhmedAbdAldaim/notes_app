@@ -70,16 +70,31 @@ class AddNoteBottomSheet extends StatelessWidget {
                         SizedBox(
                           height: 30 * 2,
                           child: ListView.builder(
-                              itemCount: 10,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10),
-                                  child:  CircleAvatar(
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              }),
+                            itemCount: cubit.colors.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    cubit.selected(index);
+                                  },
+                                  child: cubit.cureentindex ==index
+                                      ? Stack(
+                                        alignment: AlignmentDirectional.center,
+                                        children: [
+                                          CircleAvatar(
+                                              backgroundColor: cubit.colors[index]),
+                                           const Icon(Icons.check)   
+                                        ],
+                                      )
+                                      : CircleAvatar(
+                                          backgroundColor: cubit.colors[index]),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         const SizedBox(
                           height: 10,
@@ -96,7 +111,7 @@ class AddNoteBottomSheet extends StatelessWidget {
                                       title: cubit.title.text,
                                       description: cubit.des.text,
                                       date: formatdateTime,
-                                      color: Colors.amber.shade100.value));
+                                      color: cubit.colors[cubit.cureentindex].value));
                             }
                           },
                         )

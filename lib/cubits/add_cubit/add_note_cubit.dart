@@ -12,15 +12,34 @@ class AddNoteCubit extends Cubit<AddNoteState> {
   final TextEditingController title = TextEditingController();
 
   final TextEditingController des = TextEditingController();
-  
+
   addNote(NoteModel noteModel) {
     emit(AddNoteLoading());
     try {
       var box = Hive.box<NoteModel>('notes');
       box.add(noteModel);
       emit(AddNoteSuccess());
-    }on Exception catch (e) {
+    } on Exception catch (e) {
       emit(AddNoteFailure(e.toString()));
     }
   }
+
+  int cureentindex = 0;
+  bool isSelect = false;
+  selected(index) {
+    cureentindex = index;
+    isSelect = true;
+    emit(SelectedColor());
+  }
+
+  List<Color> colors = const [
+    Color(0xffC1A5A9),
+    Color(0xffC1A419),
+    Color(0xff9A4C95),
+    Color(0xff1D1A31),
+    Color(0xff454255),
+    Color(0xff0F5053),
+    Color(0xff16530F),
+    Color(0xff530F2E),
+  ];
 }
